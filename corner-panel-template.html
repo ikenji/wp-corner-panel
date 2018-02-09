@@ -1,0 +1,96 @@
+<div id="corner_panel_app">
+    <!-- init -->
+    <div v-if="!started" id="init" class="corner-panel-init">
+        <a v-on:click="started=!started;phase1=!phase1" href="javascript:void(0)">
+            <img src="">
+        </a>
+    </div>
+    <!-- /init -->
+    <!-- header -->
+    <div v-if="started" class="corner-panel-header">
+        <button v-on:click="abort" class="cp-abort-btn">X</button><br>
+        <img src="">
+    </div>
+    <!-- /header -->
+    <!-- content -->
+    <div v-if="started" class="corner-panel-content2">
+    <div v-if="started" class="corner-panel-content">
+        <!-- phase1 -->
+        <div id="phase1" class="cp-phase cp-me">
+            init message
+                <select v-if="!selected" v-on:change="changeSelect" v-model="selected">
+                <option v-for="option in options" v-bind:value="option.value">
+                {{ option.text }}
+                </option>
+            </select>
+        </div>
+        <transition name="list">
+        <div v-if="phase1_1" v-model="" id="phase1_1" class="cp-phase cp-you">
+            {{selected}}
+        </div>
+        </transition>
+        <transition name="list">
+        <div v-if="phase1_2" v-model="" id="phase1_1" class="cp-phase cp-me">
+            "{{selected}}"
+        </div>
+        </transition>
+        <!-- /phase1 -->
+        <!-- phas2 -->
+        <transition name="list">
+        <div v-if="phase2" id="phase2" class="cp-phase cp-me">
+            message2
+        </div>
+        </transition>
+        <transition name="list">
+        <div v-if="phase2" class="cp-carrier">
+            <button v-on:click="abcSelected" :disabled="is_btn_disabled" class="cp-a" id=1 name="A">A</button>
+            <button v-on:click="abcSelected" :disabled="is_btn_disabled" class="cp-b" id=2 name="B" >B</button>
+            <button v-on:click="abcSelected" :disabled="is_btn_disabled" class="cp-c" id=3 name="C">C</button>
+        </div>
+        </transition>
+        <transition name="list">
+        <div v-if="phase2_1" id="phase1_1" class="cp-phase cp-you">
+            {{abc_text}}
+        </div>
+        </transition>
+        <transition name="list">
+        <div v-if="phase2_2" id="phase1_1" class="cp-phase cp-me">
+            message3
+        </div>
+        </transition>
+        <!-- /phase2 -->
+        <!-- phase3(result) -->
+        <transition name="list">
+        <div v-if="phase3" id="phase3" class="cp-phase cp-result">
+            <transition name="list">
+            <div v-if="result==1">
+                result
+            </div>
+            </transition>
+            <transition name="list">
+            <div v-if="result==2">
+                result sb<br>
+                <p>
+                ParagraphParagraphParagraph
+                ParagraphParagraphParagraph
+                <br><br><br><br><br><br><br><br><br><br>
+                ParagraphParagraphParagraph
+                ParagraphParagraphParagraph
+                <br><br><br><br><br><br><br><br><br><br>
+                ParagraphParagraphParagraph
+                ParagraphParagraphParagraph
+                </p>
+            </div>
+            </transition>
+            <transition name="list">
+             <div v-if="result==3">
+                 message
+            </div>
+            </transition>
+       </div>
+       </transition>
+        <!-- /phase3 -->
+    </div>
+    <!-- /content -->
+    </div>
+</div>
